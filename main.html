@@ -1,1 +1,160 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rare Book Showcase | [Book Title]</title>
+    <style>
+        /* CSS Styles */
+        :root {
+            --bg-color: #fdfbf7; /* Parchment white */
+            --text-color: #2c2c2c;
+            --accent-color: #8b1c1c; /* Deep traditional red */
+            --border-color: #d4c5b0;
+        }
+
+        body {
+            font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--accent-color);
+            color: #ffffff;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            border-bottom: 5px solid #5a1212;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            margin: 0.5rem 0 0 0;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .book-image {
+            width: 100%;
+            height: auto;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-radius: 4px;
+        }
+
+        .book-details h2 {
+            color: var(--accent-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .metadata {
+            background-color: #f5f0e6;
+            padding: 1.5rem;
+            border-radius: 4px;
+            border-left: 4px solid var(--accent-color);
+            margin: 1.5rem 0;
+        }
+
+        .metadata ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .metadata li {
+            margin-bottom: 0.5rem;
+        }
+
+        .metadata strong {
+            color: var(--accent-color);
+            display: inline-block;
+            width: 100px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            color: #666;
+            border-top: 1px solid var(--border-color);
+            margin-top: 3rem;
+        }
+
+        /* Responsive Design for Mobile */
+        @media (max-width: 768px) {
+            .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>[Insert Book Title Here]</h1>
+        <p>A Masterpiece of Chinese Antiquity</p>
+    </header>
+
+    <main class="container">
+        
+        <section class="showcase-grid">
+            <div class="image-container">
+                <img src="https://via.placeholder.com/600x800.png?text=Rare+Book+Cover" alt="Cover of the Rare Book" class="book-image">
+            </div>
+
+            <div class="book-details">
+                <h2>Historical Significance</h2>
+                <p>Provide a captivating description of the book here. Discuss its historical context, what makes it rare, its journey through history, and its significance to Chinese literature or art. For example, you might mention if it's a woodblock print from the Ming Dynasty or a hand-copied manuscript.</p>
+                
+                <p>Describe the preservation state, the beautiful calligraphy, or the specific paper (like Xuan paper) used in its creation.</p>
+
+                <div class="metadata">
+                    <ul>
+                        <li><strong>Dynasty:</strong> [e.g., Ming Dynasty (1368–1644)]</li>
+                        <li><strong>Author/Editor:</strong> [Author Name or Anonymous]</li>
+                        <li><strong>Year:</strong> [e.g., Circa 1590]</li>
+                        <li><strong>Format:</strong> [e.g., Woodblock print, thread-bound]</li>
+                        <li><strong>Material:</strong> [e.g., Bamboo paper / Silk]</li>
+                        <li><strong>Origin:</strong> [e.g., Nanjing, China]</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section style="margin-top: 3rem;">
+            <h2 style="color: var(--accent-color); border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">Gallery Highlights</h2>
+            <p>You can add more images here showcasing specific pages, calligraphy details, or seal marks found inside the book.</p>
+            </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Rare Manuscript Showcase. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
