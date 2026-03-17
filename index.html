@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rare Chinese Book Showcase</title>
+    <title>Da Ming yi tong zhi : jiu shi juan</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         /* --- Antique Color Palette & Variables --- */
@@ -65,6 +65,12 @@
             transition: color 0.3s ease;
             position: relative;
         }
+
+        a {
+  text-decoration: none;
+  font-weight: bold;
+  color:#5C554B
+}
 
         nav ul li a:hover {
             color: var(--cinnabar-red);
@@ -167,6 +173,163 @@
             color: var(--aged-gold);
             transform: scale(1.05);
         }
+
+        /* --- Interactive Table of Contents --- */
+        .toc-container {
+            display: flex;
+            flex-direction: row-reverse; /* Puts tabs on the right, content on the left */
+            border: 2px solid var(--aged-gold);
+            border-radius: 4px;
+            background-color: rgba(244, 239, 232, 0.6);
+            margin-top: 40px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.02);
+            overflow: hidden;
+            min-height: 400px;
+        }
+
+        .toc-tabs {
+            width: 140px;
+            display: flex;
+            flex-direction: column;
+            border-left: 2px solid var(--aged-gold);
+            background-color: var(--rice-paper);
+        }
+
+        .toc-tab {
+            flex: 1;
+            padding: 12px 10px;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--parchment-dark);
+            cursor: pointer;
+            font-family: 'Noto Serif SC', serif;
+            font-size: 1.05em;
+            color: var(--ink-black);
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .toc-tab:last-child {
+            border-bottom: none;
+        }
+
+        .toc-tab:hover, .toc-tab.active {
+            background-color: var(--cinnabar-red);
+            color: var(--rice-paper);
+        }
+
+        .toc-display {
+            flex: 1;
+            padding: 25px 35px;
+            overflow-y: auto;
+            max-height: 500px;
+            transition: opacity 0.3s ease;
+        }
+
+        .toc-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-list li {
+            padding: 8px 0;
+            border-bottom: 1px dashed rgba(92, 85, 75, 0.3);
+            font-size: 1.05em;
+            color: var(--ink-black);
+            line-height: 1.6;
+        }
+
+        .toc-list li:last-child {
+            border-bottom: none;
+        }
+        /* --- Image Gallery Component --- */
+        .gallery-container {
+            max-width: 800px;
+            margin: 40px auto 0;
+            padding: 20px;
+            background-color: rgba(244, 239, 232, 0.6);
+            border: 2px solid var(--aged-gold);
+            border-radius: 4px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.02);
+        }
+
+        .gallery-main-view {
+            width: 100%;
+            height: 500px;
+            border: 1px solid var(--parchment-dark);
+            background-color: #EFEAE1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .gallery-main-view img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: opacity 0.4s ease-in-out;
+        }
+
+        .fading {
+            opacity: 0;
+        }
+
+        .gallery-thumbnails {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .gallery-thumb {
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            border-radius: 2px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            opacity: 0.6;
+        }
+
+        .gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-thumb:hover {
+            opacity: 1;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .gallery-thumb.active {
+            opacity: 1;
+            border-color: var(--cinnabar-red);
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .toc-container {
+                flex-direction: column;
+            }
+            .toc-tabs {
+                width: 100%;
+                flex-direction: row;
+                flex-wrap: wrap;
+                border-left: none;
+                border-bottom: 2px solid var(--aged-gold);
+            }
+            .toc-tab {
+                border-right: 1px solid var(--parchment-dark);
+                flex: 1 1 30%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -184,75 +347,196 @@
     </nav>
 
     <header class="fade-in">
-        <h1>[Title of the Rare Book]</h1>
-        <div class="subtitle">A Journey Through Ancient Chinese History and Literature</div>
-        <div class="stamp">Authentic Manuscript</div>
+        <h1>大明一统志<br></h1>
+        <div class="subtitle">Da Ming Yi Tong Zhi</div>
+        <div class="subtitle">A Record of Ming Dynasty Geography and Customs</div>
+        <div class="stamp">Authentic Reprint Available on Library of Congress</div>
     </header>
 
     <section id="about" class="fade-in">
         <h2>About the Manuscript</h2>
-        <p>Introduce the book here. Discuss its origins, what type of text it is (e.g., poetry, philosophy, medical text, historical record), and why it holds such an aura of mystery or reverence. The rice paper background and serif typography are designed to give this text an archival feel.</p>
+        <p>Da Ming Yi Tong Zhi (大明一统志 or 明一统志), or Survey of the Great Ming Empire, is a comprehensive record of geography and customs in Great Ming Empire. Li Xian (李贤) was the chief editor. The series was completed in 1461, or Tianshun 5.
+            <br/>
+            Every volume of the book covers different geographic regions. For example, <a href="https://www.loc.gov/item/2001530417/">this</a> is Volume 90 of the manuscript, which focuses on minor and foreign states such as An Nan, Zhan Cheng, and Xian Luo. What makes this item stand out is its neat formatting, detailed explanations, and the inclusion of maps to illustrate geographical locations regarding the content in the book.
+        <br/> The book is known for its fine details about each region: it details the empire's geography, history, custom, and products, while it is also known for omitting details on population, taxes, and government structure. The book, nonetheless, is very great for learning about the human geography of the Ming Dynasty.</p>
     </section>
 
     <section id="author" class="fade-in">
         <h2>The Author</h2>
-        <p>Detail the life of the scholar, monk, or official who penned this work. You can mention the dynasty they lived in, their role in society, and what drove them to compile or write this specific text.</p>
+        <p>The book was written by a group of authors led by Li Xian (李贤) and originally created in 1461. The creators, who were highly knowledgeable about the geography of their era, were commissioned by the government. Historically, the Hong Wu Emperor originally commanded six writers to create and publish this work as part of an official mission.
+            <br /> In the 1450s, there was already an imperial geography manuscript compiled for the Ming Dynasty called 寰宇通志, but Emperor Yingzong (明英宗) was not content with the work and commissioned the new team to craft 大明一统志. It is modeled after 大元大一统志, a similar work from the Yuan Dynasty, but it is more comprehensive and detailed than its predecessor. The book was not created in response to a single event, but rather as part of a long-term governmental project to document the empire's geography and customs comprehensively.
+        </p>
     </section>
 
     <section id="contents" class="fade-in">
         <h2>Contents & Chapters</h2>
-        <p>Break down the structure of the book. Traditional Chinese texts often use fascicles (juan). Describe the major themes covered within the pages and the flow of the narrative or arguments.</p>
-        <ul>
-            <li><strong>Juan I:</strong> The Heavens and Earth</li>
-            <li><strong>Juan II:</strong> The Nature of Man</li>
-            <li><strong>Juan III:</strong> The Path to Harmony</li>
-        </ul>
+        <p>The creators aimed to produce a complete and comprehensive reference series detailing geography and customs of the Ming Empire. Books in the collection focus on regions within Ming China itself as well as the foreign states. The pages are rich with unique seals, stamps, and extensive annotations that highlight the effort and engagement of previous readers.</p>
+
+       <div class="toc-container">
+            <div class="toc-tabs" id="toc-tabs">
+                <button class="toc-tab active" data-index="0">卷 1-10</button>
+                <button class="toc-tab" data-index="1">卷 11-20</button>
+                <button class="toc-tab" data-index="2">卷 21-30</button>
+                <button class="toc-tab" data-index="3">卷 31-40</button>
+                <button class="toc-tab" data-index="4">卷 41-50</button>
+                <button class="toc-tab" data-index="5">卷 51-60</button>
+                <button class="toc-tab" data-index="6">卷 61-70</button>
+                <button class="toc-tab" data-index="7">卷 71-80</button>
+                <button class="toc-tab" data-index="8">卷 81-90</button>
+            </div>
+            <div class="toc-display" id="toc-display">
+                </div>
+        </div>
+        <p>You can find the detailed geographic regions covered by the 90 Volumes on the interactive table of contents above. <a href="https://ctext.org/wiki.pl?if=gb&res=256487&remap=gb">This link </a> contains all the digitalized content from the book. <a href="https://zh.wikisource.org/wiki/%E5%A4%A7%E6%98%8E%E4%B8%80%E7%B5%B1%E5%BF%97">This</a> contains a complete menu.</p> 
+    </section>
     </section>
 
     <section id="method" class="fade-in">
         <h2>Method of Preservation</h2>
-        <p>How did this text survive through the centuries? Discuss the physical attributes: was it written on bamboo slips, silk, or early paper? Was it bound using the traditional thread-bound (xianzhuang) method? Discuss the ink and the preservation efforts.</p>
+        <p>Taking <a href="https://www.loc.gov/item/2001530417/">Vol.90</a> as an example. This particular copy is identified as a reprint, or recarve, of the original 1461 version that is redistributed. We can infer it is a reprint because some of the printed characters appear fairly blurry. Physically, the book is neatly bound with thread in a plain, undecorated style, which likely reflects the original binding method due to its close resemblance to more modern bookbinding.</p>
+<div class="gallery-container">
+           <div class="gallery-container">
+            <div class="gallery-main-view">
+                <img id="main-gallery-img" src="https://tile.loc.gov/image-services/iiif/service:asian:lcnclscd:2001530417:1A090:cover16/full/pct:12.5/0/default.jpg#h=373&w=421" alt="Manuscript Page View">
+            </div>
+            <div class="gallery-thumbnails" id="thumbnail-container">
+                <div class="gallery-thumb active" data-img="https://tile.loc.gov/image-services/iiif/service:asian:lcnclscd:2001530417:1A090:cover16/full/pct:12.5/0/default.jpg#h=373&w=421">
+                    <img src="https://tile.loc.gov/image-services/iiif/service:asian:lcnclscd:2001530417:1A090:cover16/full/pct:12.5/0/default.jpg#h=373&w=421" alt="Cover View">
+                </div>
+                <div class="gallery-thumb" data-img="https://tile.loc.gov/image-services/iiif/service:asian:lcnclscd:2001530417:1A090:00001a/full/pct:12.5/0/default.jpg#h=381&w=413">
+                    <img src="https://tile.loc.gov/image-services/iiif/service:asian:lcnclscd:2001530417:1A090:00001a/full/pct:12.5/0/default.jpg#h=381&w=413" alt="Manuscript Page 1">
+                </div>
+                <div class="gallery-thumb" data-img="https://tile.loc.gov/image-services/iiif/service:asian:lcnclscd:2001530417:1A090:26b27a/full/pct:12.5/0/default.jpg#h=378&w=411">
+                    <img src="https://tile.loc.gov/image-services/iiif/service:asian:lcnclscd:2001530417:1A090:26b27a/full/pct:12.5/0/default.jpg#h=378&w=411" alt="Manuscript Page 2">
+                </div>
+                <div class="gallery-thumb" data-img="https://tile.loc.gov/image-services/iiif/service:asian:lcnclscd:2001530417:1A090:00001a/full/pct:12.5/0/default.jpg#h=381&w=413">
+                    <img src="https://tile.loc.gov/image-services/iiif/service:asian:lcnclscd:2001530417:1A090:00001a/full/pct:12.5/0/default.jpg#h=381&w=413" alt="Manuscript Page 3">
+                </div>
+            </div>
+        </div>
+        </div>
     </section>
 
     <section id="timeline" class="fade-in">
         <h2>Historical Timeline</h2>
-        <p>Trace the journey of the book. From its creation in a specific dynasty, through times of war or peace, its potential loss and rediscovery, up to its current home in an archive or museum.</p>
+        <p>The text is a Ming Dynasty geographical reference book that drew heavy inspiration from similar works of the Yuan Dynasty. It was not created in response to a single event, but rather as part of a long-term governmental project. While published for official purposes, copies likely reached enthusiasts and collectors as well. Today, it resides in the U.S. Library of Congress as part of the Chinese Rare Book Collection, having been selected from 5,300 valuable titles housed in their Asian Division.</p>
     </section>
 
     <section id="significance" class="fade-in">
         <h2>Cultural Significance</h2>
-        <p>Explain why this text matters today. Does it change our understanding of a historical event? Does it offer unique insights into ancient Chinese medicine or philosophy? This is where you outline the book's legacy.</p>
+        <p>This manuscript is a highly significant primary document from the Ming Dynasty documenting the geography and culture of various states. The current collection of <a href="https://www.loc.gov/item/2001530417/">Vol.90</a>  reveals a strong collector's bias, evidenced by an inscription that reads: "賣衣買書志亦迂，愛護不異隨侯珠，有假不返遭神誅，子孫鬻之何其愚" (Selling clothes to buy books is eccentric; protecting them like the Pearl of Marquis Sui. If borrowed and not returned, may the gods strike you; if descendants sell this, how foolish they are). Analyzing this source offers a fascinating connection to the past, as some of the foreign states mentioned, like Xian Luo, are still recognizable names today. They are among some of the best documents available to learn about Ming history and geography.</p>
     </section>
 
     <section id="view" class="fade-in" style="text-align: center; border-bottom: none;">
         <h2>View the Text</h2>
-        <p>Step into history and explore the high-resolution scans of the original manuscript alongside the modern translations.</p>
-        <a href="#" class="read-btn">Open the Archives</a>
+        <p>Step into history and explore the digital scans of this primary source at the Library of Congress.</p>
+        <a href="https://www.loc.gov/search/?in=&q=da+ming+yi+tong+zhi&new=true" target="_blank" rel="noopener noreferrer" class="read-btn">Open the Archives</a>
     </section>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // Set up the Intersection Observer
             const observerOptions = {
-                root: null, // use the viewport
+                root: null,
                 rootMargin: "0px",
-                threshold: 0.15 // trigger when 15% of the element is visible
+                threshold: 0.15 
             };
 
             const observer = new IntersectionObserver((entries, observer) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        // Add the 'visible' class to trigger the CSS transition
                         entry.target.classList.add('visible');
-                        // Optional: unobserve if you only want it to animate once
-                        // observer.unobserve(entry.target); 
                     }
                 });
             }, observerOptions);
 
-            // Target all elements with the 'fade-in' class
             const fadeElements = document.querySelectorAll('.fade-in');
             fadeElements.forEach(el => observer.observe(el));
+        });
+
+        // --- Interactive Table of Contents Data & Logic ---
+        const bookVolumes = [
+            [ // 1-10
+                "序", "卷一　　　京師　　順天府", "卷二　　　保定府　河間府", "卷三　　　真定府", "卷四　　　順德府　廣平府　大名府", "卷五　　　永平府　延慶州　保安州　萬全都指揮使司", "卷六　　　南京　　應天府", "卷七　　　中都　　鳳陽府", "卷八　　　蘇州府", "卷九　　　松江府", "卷十　　　常州府"
+            ],
+            [ // 11-20
+                "卷十一　　鎮江府", "卷十二　　揚州府", "卷十三　　淮安府", "卷十四　　廬州府　安慶府", "卷十五　　太平府　寧國府", "卷十六　　池州府　徽州府", "卷十七　　廣德州　和州", "卷十八　　滁州　　徐州", "卷十九　　山西布政司　太原府", "卷二十　　平陽府"
+            ],
+            [ // 21-30
+                "卷二十一　大同府　潞安府　汾州　遼州　沁州　澤州", "卷二十二　山東布政司　漢南府", "卷二十三　兗州府", "卷二十四　東昌府　青州府", "卷二十五　登州府　萊州府　遼東都指揮使司", "卷二十六　河南布政司　開封府上", "卷二十七　開封府下　歸德府", "卷二十八　彰德府　衛輝府　懷慶府", "卷二十九　河南府", "卷三十　　南陽府"
+            ],
+            [ // 31-40
+                "卷三十一　汝寧府　汝州", "卷三十二　陝西布政司　西安府上", "卷三十三　西安府下", "卷三十四　鳳翔府　漢中府", "卷三十五　平凉府　鞏昌府", "卷三十六　臨洮府　應陽府　延安府", "卷三十七　寧夏衛　寧夏中衛　洮州衛軍民指揮使司　岷州衛軍民指揮使司　河州衛軍民指揮使司　靖虜衛　陝西行都指揮使司", "卷三十八　浙江布政司　杭州府", "卷三十9　嘉興府", "卷四十　　湖州府"
+            ],
+            [ // 41-50
+                "卷四十一　嚴州府", "卷四十二　金華府", "卷四十三　衢州府", "卷四十四　處州府", "卷四十五　紹興府", "卷四十六　寧波府", "卷四十七　台州府", "卷四十八　溫州府", "卷四十九　江西布政司　南昌府", "卷五十　　饒州府"
+            ],
+            [ // 51-60
+                "卷五十一　廣信府", "卷五十二　南康府　九江府", "卷五十三　建昌府", "卷五十四　撫州府", "卷五十五　臨江府", "卷五十六　吉安府", "卷五十七　瑞州府　袁州府", "卷五十八　贑州府　南安府", "卷五十九　湖廣布政司　武昌府　漢陽府", "卷六十　　興都　承天府　襄陽府　鄖陽府"
+            ],
+            [ // 61-70
+                "卷六十一　德安府　黃州府", "卷六十二　荊州府　岳州府", "卷六十三　長沙府　賓慶府", "卷六十四　衡州府　常德府", "卷六十五　辰州府　永州府", "卷六十六　靖州　郴州　施州衛軍民指揮使司　容美宣撫司　永順軍民宣慰使司　保靖州軍民宣慰使司　五寨長官司　湖廣行都指揮使司", "卷六十七　四川布政司　成都府", "卷六十八　保寧府　順慶府", "卷六十九　敘州府　重慶府", "卷七十　　夔州府　馬湖府"
+            ],
+            [ // 71-80
+                "卷七十一　龍安府　鎮雄府　潼川府　眉州", "卷七十二　嘉定州　邛州　瀘州　稚州　東川軍民府　烏蒙軍民府　烏撒軍民府　播州宣慰使司　永寧宣撫司", "卷七十三　天全六番招討使司　思曩日安撫司　黎州安撫司　平茶洞長官司　松藩等處軍民指揮使司　疊溪守禦軍民千戶所　四川行都指揮使司", "卷七十四　福建布政司　福州府", "卷七十五　泉州府", "卷七十六　建寧府", "卷七十七　延平府　汀州府　興化府", "卷七十八　邵武府　漳州府　福寧州", "卷七十九　廣東布政司　廣州府　韶州府", "卷八十　　南雄府　惠州府　潮州府"
+            ],
+            [ // 81-90
+                "卷八十一　肇慶府　高州府", "卷八十二　廉州府　雷州府　瓊州府", "卷八十三　廣西布政司　桂林府　柳州府", "卷八十四　慶遠府　平樂府　梧州府", "卷八十五　潯州府　南寧府　太平府　思明府　思恩軍民府　鎮安府　田州... 等長官司", "卷八十六　雲南布政司　雲南府　大理府　臨安府　楚雄府　澂江府　蒙化府", "卷八十七　景東府　廣南府　廣西府　鎮沅府... 等宣撫司", "卷八十八　貴州布政司　貴陽府　貴州宣慰使司... 等衛", "卷八十九　外夷　朝鮮國　女直　日本國　琉球國　西蕃... 等衛", "卷九十　　安南　占城國　暹羅國　爪哇國　真臘國... 等國"
+            ]
+        ];
+
+        const tocDisplay = document.getElementById("toc-display");
+        const tocTabs = document.querySelectorAll(".toc-tab");
+
+        // Function to render the list based on index
+        function renderToc(index) {
+            // Fade out
+            tocDisplay.style.opacity = 0;
+            
+            setTimeout(() => {
+                const listItems = bookVolumes[index].map(item => `<li>${item}</li>`).join("");
+                tocDisplay.innerHTML = `<ul class="toc-list">${listItems}</ul>`;
+                // Fade in
+                tocDisplay.style.opacity = 1;
+            }, 150);
+        }
+
+        // Initialize with the first chunk
+        renderToc(0);
+
+        // Add hover event listeners to tabs
+        tocTabs.forEach(tab => {
+            tab.addEventListener("mouseenter", (e) => {
+                // Remove active class from all
+                tocTabs.forEach(t => t.classList.remove("active"));
+                // Add active class to hovered tab
+                e.target.classList.add("active");
+                // Render the corresponding content
+                const index = e.target.getAttribute("data-index");
+                renderToc(index);
+            });
+        });
+
+        // --- Image Gallery Logic ---
+        const mainImg = document.getElementById("main-gallery-img");
+        const thumbnails = document.querySelectorAll(".gallery-thumb");
+
+        thumbnails.forEach(thumb => {
+            thumb.addEventListener("click", function() {
+                if (this.classList.contains("active")) return;
+
+                thumbnails.forEach(t => t.classList.remove("active"));
+                this.classList.add("active");
+
+                const newImgSrc = this.getAttribute("data-img");
+                mainImg.classList.add("fading");
+
+                setTimeout(() => {
+                    mainImg.src = newImgSrc;
+                    mainImg.onload = () => {
+                        mainImg.classList.remove("fading");
+                    };
+                }, 400); 
+            });
         });
     </script>
 
